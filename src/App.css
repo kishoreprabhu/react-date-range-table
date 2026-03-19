@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  /* Calendar picker trigger */
+  .picker-trigger {
+    @apply flex items-center gap-2 px-3.5 py-2 rounded-lg border border-gray-300 bg-white
+           cursor-pointer text-sm text-gray-800 transition-all duration-200
+           hover:border-primary focus:outline-none;
+  }
+  .picker-trigger.open {
+    @apply border-primary shadow-[0_0_0_2px_rgba(22,119,255,0.15)];
+  }
+
+  /* Calendar dropdown panel */
+  .calendar-panel {
+    @apply absolute top-11 left-0 z-50 bg-white rounded-xl border border-gray-100
+           shadow-[0_8px_32px_rgba(0,0,0,0.12)] p-5 min-w-[320px];
+  }
+
+  /* Day cell */
+  .day-cell {
+    @apply text-center py-1.5 px-1 text-[13px] cursor-pointer relative
+           transition-colors duration-100 select-none;
+  }
+  .day-cell.disabled  { @apply cursor-default text-gray-300 line-through; }
+  .day-cell.other-month { @apply text-gray-300; }
+  .day-cell.in-range  { @apply bg-blue-50; }
+  .day-cell.is-start,
+  .day-cell.is-end    { @apply bg-primary text-white rounded-md font-medium; }
+  .day-cell.is-today:not(.is-start):not(.is-end) {
+    @apply border border-primary rounded-md font-bold;
+  }
+  .day-cell.normal:hover:not(.disabled):not(.other-month) {
+    @apply bg-blue-100 rounded-md;
+  }
+
+  /* Nav button */
+  .nav-btn {
+    @apply border-none bg-transparent cursor-pointer px-2 py-1 rounded
+           text-gray-400 flex items-center hover:bg-gray-100 transition-colors;
+  }
+
+  /* Toggle switch */
+  .toggle-track {
+    @apply w-9 h-5 rounded-full border-none cursor-pointer relative transition-colors duration-200;
+  }
+  .toggle-thumb {
+    @apply absolute top-0.5 w-4 h-4 rounded-full bg-white transition-all duration-200;
+  }
+
+  /* Table */
+  .data-table { @apply w-full border-collapse text-sm; }
+  .data-table thead tr { @apply border-b-2 border-gray-100; }
+  .data-table th {
+    @apply text-left px-3.5 py-2.5 text-gray-500 font-semibold text-xs
+           uppercase tracking-wide select-none whitespace-nowrap transition-colors;
+  }
+  .data-table th.sortable { @apply cursor-pointer; }
+  .data-table th.sorted   { @apply bg-blue-50; }
+  .data-table td          { @apply px-3.5 py-2.5 text-gray-600; }
+  .data-table tbody tr    { @apply border-b border-gray-50 transition-colors duration-100; }
+  .data-table tbody tr:nth-child(even) { @apply bg-gray-50/50; }
+  .data-table tbody tr:hover           { @apply bg-blue-50; }
+
+  /* Status badge */
+  .status-badge { @apply text-xs font-medium px-2.5 py-0.5 rounded-full border; }
+  .status-active    { @apply bg-green-50 text-green-700 border-green-200; }
+  .status-pending   { @apply bg-yellow-50 text-yellow-700 border-yellow-200; }
+  .status-inactive  { @apply bg-red-50 text-red-600 border-red-200; }
+  .status-completed { @apply bg-blue-50 text-blue-700 border-blue-200; }
+
+  /* Category pill */
+  .category-pill { @apply text-xs bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded; }
+
+  /* Selected range display */
+  .range-display {
+    @apply mt-3.5 px-3 py-2 bg-gray-50 rounded-md text-[13px] text-gray-500
+           border border-gray-100;
+  }
+
+  /* Days header */
+  .days-header { @apply grid grid-cols-7 text-center mb-1; }
+  .days-header span { @apply text-[11px] text-gray-400 font-semibold py-0.5; }
+
+  /* Date info dot */
+  .date-dot {
+    @apply absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary;
+  }
+  .is-start .date-dot,
+  .is-end .date-dot { @apply bg-white; }
+}
+
+  /* Pagination */
+  .pagination-btn {
+    @apply w-8 h-8 flex items-center justify-center rounded-md border border-gray-200
+           text-sm text-gray-600 bg-white cursor-pointer transition-all duration-150
+           hover:border-primary hover:text-primary disabled:opacity-40 disabled:cursor-not-allowed
+           disabled:hover:border-gray-200 disabled:hover:text-gray-600;
+  }
+  .pagination-btn-active {
+    @apply bg-primary text-white border-primary hover:text-white;
+  }
